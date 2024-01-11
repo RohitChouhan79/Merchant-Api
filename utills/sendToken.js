@@ -1,5 +1,5 @@
-exports.sendtokens=(merchant,statuscode,res)=>{
-    const token=merchant.getjwttoken();
+exports.sendtokens=(user,statuscode,res)=>{
+    const token=user.getjwttoken();
     // res.json({token});
     const option={
         expires:new Date(
@@ -8,5 +8,5 @@ exports.sendtokens=(merchant,statuscode,res)=>{
         httpOnly:true,
         // secure:true,
     };
-    res.status(statuscode).cookie("token",token,option).json({sucess:true,id:merchant._id,token});
+    res.status(statuscode).cookie("token",token,option).json({sucess:true,id:user._id,token});
 }

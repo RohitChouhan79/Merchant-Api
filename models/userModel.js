@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 const bcrypt=require("bcryptjs")
 const jwt=require("jsonwebtoken")
 
-const merchantModel=new mongoose.Schema({
+const userModel=new mongoose.Schema({
     email:{
         type:String,
         unique:true,
@@ -19,11 +19,12 @@ const merchantModel=new mongoose.Schema({
 
         // match: 
     },
-    permissions:["read","write"]
+    permissions:["read","write"],
+    // merchants:[{type:mongoose.Schema.Types.ObjectId,ref:"merchants"}],
 
 },{timestamps:true})
 
-merchantModel.pre("save",function(){
+userModel.pre("save",function(){
     if(!this.isModified("password")){
         return;
     }
@@ -31,15 +32,15 @@ merchantModel.pre("save",function(){
     this.password=bcrypt.hashSync(this.password,salt)
 })
 
-merchantModel.methods.comparepassword=function(password){
+userModel.methods.comparepassword=function(password){
     return bcrypt.compareSync(password,this.password)
 }
 
-merchantModel.methods.getjwttoken=function(){
+userModel.methods.getjwttoken=function(){
     return jwt.sign({id: this._id},process.env.JWT_SECRET_KEY,{
         expiresIn:process.env.JWT_EXPIRE,
     })
     }; 
-const Merchant=mongoose.model("merchant",merchantModel)
+const User=mongoose.model("user",userModel)
 
-module.exports=Merchant
+module.exports=User
