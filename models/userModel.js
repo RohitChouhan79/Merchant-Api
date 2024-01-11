@@ -41,6 +41,6 @@ userModel.methods.getjwttoken=function(){
         expiresIn:process.env.JWT_EXPIRE,
     })
     }; 
-const User=mongoose.model("user",userModel)
+const USER=mongoose.model("user",userModel)
 
-module.exports=User
+module.exports=USER

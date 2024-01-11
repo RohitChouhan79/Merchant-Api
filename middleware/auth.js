@@ -1,6 +1,6 @@
 const jwt=require("jsonwebtoken");
 const Errorhandler = require("../utills/ErrorHandler");
-const { catchAsyncErrors } = require("./catchAsyncErrors");
+const { catchAsyncErrors } = require("./catchAsyncError");
 
 // Created is authenticate function
 

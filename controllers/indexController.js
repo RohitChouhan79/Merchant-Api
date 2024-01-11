@@ -1,16 +1,17 @@
-const { catchAsyncErrors } = require("../middleware/catchAsyncErrors")
+const { catchAsyncErrors } = require("../middleware/catchAsyncError")
+const Merchants = require("../models/merchentModel")
 const USER = require("../models/userModel")
 const Errorhandler = require("../utills/ErrorHandler")
 const { sendtokens } = require("../utills/sendToken")
 
 
-exports.homepage = catchAsyncErrors(async (req, res, next) => {
+exports.homepage =catchAsyncErrors(async (req, res, next) => {
     res.json({ message: "Homepage" })
 })
 
 exports.merchantsignup = catchAsyncErrors(async (req, res, next) => {
     const user = await new USER(req.body).save();
-    // req.status(201).json(merchant);
+    
     sendtokens(user, 201, res)
 })
 
@@ -38,8 +39,13 @@ exports.merchantsignout = catchAsyncErrors(async (req, res, next) => {
 exports.merchantsession = catchAsyncErrors(async (req, res, next) => {
     res.json({
         authenticated: true,
-        merchant: req.merchant,
-        // permissions: req.merchant.permissions
+        // user: req.user,
+        // permissions: req.USER.permissions
     })
 
 }) 
+
+
+
+
+

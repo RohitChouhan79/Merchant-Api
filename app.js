@@ -29,6 +29,7 @@ app.use(cookieparser());
 
 // routes
 app.use("/",require("./routes/indexRoutes"))
+app.use("/api",require("./routes/merchantRoutes"))
 
 // error Handling
 const Errorhandler=require("./utills/ErrorHandler");
