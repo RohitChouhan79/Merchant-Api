@@ -1,21 +1,23 @@
 const express=require("express");
-const { homepage,merchantsignup,merchantsignin,merchantsignout,merchantsession } = require("../controllers/indexController");
+const { homepage,merchantsignup,merchantsignin,merchantsignout,merchantsession, } = require("../controllers/indexController");
 const { isAuthenticated } = require("../middleware/auth");
 const router=express.Router()
 
 // Get / 
 router.get("/",isAuthenticated, homepage)
 
-// Get / 
+// Get /auth/signup
 router.post("/auth/signup",merchantsignup)
 
-// post / 
+// post /auth/login
 router.post("/auth/login",merchantsignin)
 
-// signout
+//post /auth/logout
 router.post("/auth/logout",isAuthenticated,merchantsignout)
 
-// session
+//post /auth/session
 router.get("/auth/session",isAuthenticated,merchantsession)
+
+
 
 module.exports=router;

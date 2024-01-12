@@ -18,9 +18,7 @@ const merchantModel=new mongoose.Schema({
          'Please fill a valid email address']
      },
      commission:Number,
-
-
-})
+},{timestamps:true})
 
 const Merchants=mongoose.model("merchants",merchantModel)
 module.exports=Merchants
