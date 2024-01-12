@@ -20,7 +20,7 @@ const userModel=new mongoose.Schema({
         // match: 
     },
     permissions:["read","write"],
-    // merchants:[{type:mongoose.Schema.Types.ObjectId,ref:"merchants"}],
+    merchants:[{type:mongoose.Schema.Types.ObjectId,ref:"merchants"}],
 
 },{timestamps:true})
 

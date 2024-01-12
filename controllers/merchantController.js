@@ -19,13 +19,15 @@ exports.pageinatefilter = catchAsyncErrors(async (req, res, next) => {
     }
     const MerchantstData = await Merchants.find();
     const fillteredMerchent = MerchantstData.filter((e) => {
-        if (e.merchantName.toLowerCase().includes(req.query.merchantName) && e.createdAt >= todate && e.createdAt >= fromdate) {
+        const splitdate = (e.createdAt).toLocaleDateString().split('/');
+        const compdate = `${splitdate[2]}-${splitdate[0]}-${splitdate[1]}`;
+        if (e.merchantName.toLowerCase().includes(req.query.merchantName) && compdate >= todate && compdate >= fromdate) {
             return e;
         }
     })
-    const pageinatefilter = fillteredMerchent.slice(startIndex, endIndex)
 
-    res.json({ merchants: pageinatefilter, currentpage: parseInt(page), currentpageSize: parseInt(pageSize), totalSize: fillteredMerchent.length() });
+    const pageinatefilter = fillteredMerchent.slice(startIndex, endIndex)
+    res.json({ merchants: pageinatefilter, currentpage: parseInt(page), currentpageSize: parseInt(pageSize), totalSize: fillteredMerchent.length });
 });
 
 
@@ -70,7 +72,9 @@ exports.filtermerchant = catchAsyncErrors(async (req, res, next) => {
     try {
         const MerchantstData = await Merchants.find();
         const fillteredMerchent = MerchantstData.filter((e) => {
-            if (e.merchantName.toLowerCase().includes(req.query.merchantName) && e.createdAt >= todate && e.createdAt >= fromdate) {
+            const splitdate = (e.createdAt).toLocaleDateString().split('/');
+            const compdate = `${splitdate[2]}-${splitdate[0]}-${splitdate[1]}`;
+            if (e.merchantName.toLowerCase().includes(req.query.merchantName) && compdate >= todate && compdate >= fromdate) {
                 return e;
             }
         })
